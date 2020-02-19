@@ -1,9 +1,11 @@
 #include <sourcemod>
 #include <sdktools>
 #include <cstrike>
+#include <SteamWorks>
 #include "includes/color_Stock.inc"
 #include "dangerzone/dangerzone_teams.sp"
 #include "dangerzone/killsounds.sp"
+#include "dangerzone/dangerzone_api.sp"
 
 /*************************************************
  *                                               *
@@ -23,9 +25,9 @@
 //////////////////////////////
 //    PLUGIN DEFINITION     //
 //////////////////////////////
-#define PLUGIN_NAME         "YK DangerZone Core"
-#define PLUGIN_AUTHOR       "YoumuKonapku"
-#define PLUGIN_DESCRIPTION  "DangerZone Core Plugin For CSGO"
+#define PLUGIN_NAME         "YK DangerZone Core + Web API"
+#define PLUGIN_AUTHOR       "YoumuKonapku, FlowingSPDG"
+#define PLUGIN_DESCRIPTION  "DangerZone Plugin + Web API Support For CSGO"
 #define PLUGIN_VERSION      "1.0"
 #define PLUGIN_URL          "https://www.youmukonpaku.cn/"
 
@@ -100,12 +102,15 @@ Menu g_mGiveWeaponMenu = null;
 int g_iFirstBlood = 0;
 int g_iPlayerKillsCount[65];
 
+
+
 //////////////////////////////
 //     PLUGIN FORWARDS      //
 //////////////////////////////
 public void OnPluginStart () {
   YK_InitPlugin();
   OnTeamsPluginStart();
+  OnAPIPluginStart();
 }
 
 public void OnMapStart () {
@@ -118,7 +123,7 @@ public void OnClientPutInServer (int client) {
   char clientName[255];
   GetClientName(client, clientName, 255);
   tPrintToChatAll(" %t %t", "prefix", "join game", clientName);
-  DB_InitUser(client);
+  // DB_InitUser(client);
   if (g_iGameStartedStatus == 1) {
     g_iPlayerAliveStatus[client] = 2;
   }
@@ -135,7 +140,7 @@ public void YK_InitPlugin () {
   PrintToServer("Initializing plugin: %s", PLUGIN_NAME);
   // ANY FUNCTIONS THAT SHOULD BE IN OnPluginStart
   LoadTranslations("yk_dangerzone.phrases");
-  YK_DatabaseInit();
+  // YK_DatabaseInit();
   YK_WelcomeMessage();
 	YK_InitConvars();
   YK_InitCommands();
@@ -397,7 +402,8 @@ public void Event_RoundEnd (Event event, const char[] name, bool dontBroadcast) 
     for (int client = 1; client <= MaxClients; ++client) {
       if (IsClientInGame(client)) {
         if (IsPlayerAlive(client) && !IsFakeClient(client)) {
-          DB_AddWinToPlayer(client);
+          // DB_AddWinToPlayer(client);
+          API_AddWinToPlayer(client);
         }
       }
     }
@@ -454,9 +460,11 @@ public void Event_PlayerDeath (Event event, const char[] name, bool dontBroadcas
     char attackerName[255];
     GetClientName(attacker, attackerName, 255);
     if (attacker != victim && attacker != 0) {
-      DB_AddKillToPlayer(attacker);
+      // DB_AddKillToPlayer(attacker);
+      API_AddKillToPlayer(attacker);
     }
-    DB_AddDeathToPlayer(victim);
+    // DB_AddDeathToPlayer(victim);
+    API_AddDeathToPlayer(victim);
     if (attacker != victim && attacker != 0) {
       g_iPlayerKillsCount[attacker]++;
       if (g_iPlayerKillsCount[attacker] >= 3) {
@@ -608,6 +616,15 @@ public void YK_StartGame (int readyPlayersCount) {
   g_hReadyTimer = null;
   YK_ActiveBroadcastTimer();
   YK_ActiveSpecTimer();
+
+  char mapName[64];
+  GetCurrentMap(mapName, sizeof(mapName));
+
+  Handle req = CreateRequest(k_EHTTPMethodPOST, "match/dz/gamestart");
+  if (req != INVALID_HANDLE) {
+    AddStringParam(req, "mapname", mapName);
+    SteamWorks_SendHTTPRequest(req);
+  }
 }
 
 public void YK_EndGame () {
@@ -620,6 +637,16 @@ public void YK_EndGame () {
   g_hBroadcastTimer = null;
   YK_ActiveReadyTimer();
   YK_MoveAllPlayersInGame();
+  /*
+  char mapName[64];
+  GetCurrentMap(mapName, sizeof(mapName));
+
+  Handle req = CreateRequest(k_EHTTPMethodPOST, "match/dz/gameend");
+  if (req != INVALID_HANDLE) {
+    AddStringParam(req, "mapname", mapName);
+    SteamWorks_SendHTTPRequest(req);
+  }
+  */
 }
 
 //////////////////////////////
@@ -1151,6 +1178,12 @@ static void GenerateConfigs (char[] path) {
   file.WriteLine("yk_dzReadyToStartPlayersCount 6");
   file.WriteLine("");
 
+  //Web API Destination
+  file.WriteLine("// Web API Destination URL");
+  file.WriteLine("yk_dzWeb_api_url \"http://localhost:8080\"");
+  file.WriteLine("");
+  
+
   delete file;
 }
 
@@ -1214,9 +1247,12 @@ static void GenerateNewConfigs (char[] path, int a, int b, int c, int d, int e, 
   delete file;
 }
 
+/*
 //////////////////////////////
 //         DATABASE         //
 //////////////////////////////
+*/
+
 public void YK_DatabaseInit () {
   Database.Connect(SQLCallback_Connection, "csgo", 0);
 }
@@ -1300,21 +1336,57 @@ public void DB_AddDeathToPlayer (int client) {
   }
 }
 
-public void DB_AddWinToPlayer (int client) {
-  if (IsFakeClient(client))
-    return;
-  char sql[255];
-  int steamid = GetSteamAccountID(client);
-  FormatEx(sql, 255, "UPDATE `dangerzone` SET `win` = `win` + 1 WHERE `steamid` = '%d'", steamid);
-  DBResultSet results = SQL_Query(g_hDatabase, sql);
-  if (results == null) {
-    char error[255];
-    SQL_GetError(g_hDatabase, error, sizeof(error));
-    PrintToServer("Failed to query (error: %s)", error);
+
+/*
+//////////////////////////////
+//         Web API          //
+//////////////////////////////
+*/
+static Handle CreateRequest(EHTTPMethod httpMethod, const char[] apiMethod, any:...) {
+  char url[1024];
+  Format(url, sizeof(url), "%s%s", g_APIURL, apiMethod);
+
+  char formattedUrl[1024];
+  VFormat(formattedUrl, sizeof(formattedUrl), url, 3);
+
+  LogMessage("Trying to create request to url %s", formattedUrl);
+
+  Handle req = SteamWorks_CreateHTTPRequest(httpMethod, formattedUrl);
+  if (req == INVALID_HANDLE) {
+    LogError("Failed to create request to %s", formattedUrl);
+    return INVALID_HANDLE;
   } else {
-    delete results;
+    SteamWorks_SetHTTPCallbacks(req, RequestCallback);
+    return req;
   }
 }
+
+public int RequestCallback(Handle request, bool failure, bool requestSuccessful,
+                    EHTTPStatusCode statusCode) {
+  if (failure || !requestSuccessful) {
+    LogError("API request failed, HTTP status code = %d", statusCode);
+    char response[1024];
+    SteamWorks_GetHTTPResponseBodyData(request, response, sizeof(response));
+    LogError(response);
+    return;
+  }
+}
+
+static void AddStringParam(Handle request, const char[] key, const char[] value) {
+  if (!SteamWorks_SetHTTPRequestGetOrPostParameter(request, key, value)) {
+    LogError("Failed to add http param %s=%s", key, value);
+  } else {
+    LogMessage("Added param %s=%s to request", key, value);
+  }
+}
+
+/*
+static void AddIntParam(Handle request, const char[] key, int value) {
+  char buffer[32];
+  IntToString(value, buffer, sizeof(buffer));
+  AddStringParam(request, key, buffer);
+}
+*/
 
 //////////////////////////////
 //         WELCOME          //

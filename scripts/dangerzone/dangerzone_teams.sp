@@ -1,14 +1,14 @@
  char colors[][] = {
-    "Blue Team",
-    "Turquoise Team",
-    "Banana Team",
-    "Magenta Team",
-    "Artic Team",
-    "Lime Team",
-    "Orange Team",
-    "Pink Team",
-    "Purple Team",
-    "White Team"
+	"Blue Team",
+	"Turquoise Team",
+	"Banana Team",
+	"Magenta Team",
+	"Artic Team",
+	"Lime Team",
+	"Orange Team",
+	"Pink Team",
+	"Purple Team",
+	"White Team"
 };
 
 #include <sdktools>
@@ -29,11 +29,14 @@ ConVar sv_dz_team_count
 // public void OnPluginStart()
 public void OnTeamsPluginStart()
 {
+	LoadTranslations("common.phrases"); // ReplyToTargetError require this
 	LoadTranslations("yk_dangerzone_team.phrases");
 
 	sv_dz_team_count = FindConVar("sv_dz_team_count");
 	if(sv_dz_team_count == null) SetFailState("No such Cvar 'sv_dz_team_count'");
 	RegConsoleCmd("sm_dzteam", JoinTeam);
+	RegServerCmd("sm_dzteam", AssignTeam);
+	RegServerCmd("sm_dzteam_steamid", AssignTeamBySteamID);
 	// HookEvent("player_spawn", Event_PlayerSpawn);
 }
 
@@ -106,10 +109,80 @@ void ShowTeamMenu(int client)
 
 public int handler(Menu menu, MenuAction action, int param1, int param2)
 {
-    if(action == MenuAction_End) delete menu;
-    if(action == MenuAction_Select)
-    {
-			FakeClientCommand(param1, "dz_jointeam %i", param2+1);
-			JoinTeam(param1, 0);
-    }
-}  
+	if(action == MenuAction_End) delete menu;
+	if(action == MenuAction_Select)
+	{
+		FakeClientCommand(param1, "dz_jointeam %i", param2+1);
+		JoinTeam(param1, 0);
+	}
+}
+
+public Action AssignTeam(int args)
+{
+	if (args != 2) {
+		ReplyToCommand(0, "[DZ] Usage: sm_dzteam <#userid|name> <TeamNumber>");
+		return Plugin_Handled;
+	}
+	char targetname[64];
+	char teamnumber[32];
+	GetCmdArg(1, targetname, sizeof(targetname));
+	GetCmdArg(2, teamnumber, sizeof(teamnumber));
+	// PrintToChatAll(" %s", targetname);
+	// PrintToChatAll(" %s", teamnumber);
+	int target = FindTarget(0,targetname,true,false);
+	if (target == -1) {
+		ReplyToCommand(0, "[DZ] Target not found.");
+		return Plugin_Handled;
+	}
+	if (GameRules_GetProp("m_bWarmupPeriod") != 1) {
+		PrintToChat(target, " %t %t", "prefix", "error select team");
+		return Plugin_Handled;
+	}
+	int userid = GetClientUserId(target);
+	ServerCommand("dz_jointeam %s %i",teamnumber,userid);
+	return Plugin_Handled;
+}
+
+public Action AssignTeamBySteamID(int args)
+{
+	if (args != 2) {
+		ReplyToCommand(0, "[DZ] Usage: sm_dzteam_steamid <steamid> <TeamNumber>");
+		return Plugin_Handled;
+	}
+	char steamid[64];
+	char teamnumber[32];
+	GetCmdArg(1, steamid, sizeof(steamid));
+	GetCmdArg(2, teamnumber, sizeof(teamnumber));
+	// PrintToChatAll(" %s", targetname);
+	// PrintToChatAll(" %s", teamnumber);
+	int target = -1;
+	for(int i = 1; i <= MaxClients; i++) {
+		if (IsClientInGame(i) && (!IsFakeClient(i))) {
+			char SteamID64[64];
+			char Steam2[64];
+			char Steam3[64];
+			GetClientAuthId(i, AuthId_SteamID64, SteamID64, sizeof(SteamID64), true);
+			GetClientAuthId(i, AuthId_Steam2, Steam2, sizeof(Steam3), true);
+			GetClientAuthId(i, AuthId_Steam3, Steam3, sizeof(Steam2), true);
+			// PrintToChatAll(" %s", SteamID64);
+			// PrintToChatAll(" %s", Steam2);
+			// PrintToChatAll(" %s", Steam3);%
+			
+			if (StrEqual(SteamID64,steamid,false) || StrEqual(Steam2,steamid,false) || StrEqual(Steam3,steamid,false)) {
+				target = i;
+				break;
+			}
+		}
+	}
+	if (target == -1) {
+		ReplyToCommand(0, "[DZ] Target not found.");
+		return Plugin_Handled;
+	}
+	if (GameRules_GetProp("m_bWarmupPeriod") != 1) {
+		PrintToChat(target, " %t %t", "prefix", "error select team");
+		return Plugin_Handled;
+	}
+	int userid = GetClientUserId(target);
+	ServerCommand("dz_jointeam %s %i",teamnumber,userid);
+	return Plugin_Handled;
+}

@@ -4,66 +4,77 @@
     {
         "en" " {green}*************************************************"
         "chi" " {green}*************************************************"
+        "jp" " {green}*************************************************"
     }
     
     "welcome line 2"
     {
         "en" " {green}*    Youmu Konpaku DangerZone Core Plugin       *"
         "chi" " {green}*    Youmu Konpaku DangerZone Core Plugin       *"
+        "jp" " {green}*    Youmu Konpaku DangerZone Core Plugin       *"
     }
     
     "welcome line 3"
     {
         "en" " {green}*                               for sourcemod   *"
         "chi" " {green}*                               for sourcemod   *"
+        "jp" " {green}*                               for sourcemod   *"
     }
     
     "welcome line 4"
     {
         "en" " {green}*    Site:  https://www.youmukonpaku.cn/        *"
         "chi" " {green}*    Site:  https://www.youmukonpaku.cn/        *"
+        "jp" " {green}*    Site:  https://www.youmukonpaku.cn/        *"
     }
     
     "welcome line 5"
     {
         "en" " {green}*    QQ:    69302630                            *"
         "chi" " {green}*    QQ:    69302630                            *"
+        "jp" " {green}*    QQ:    69302630                            *"
     }
 
     "welcome line 6"
     {
         "en" " {green}*    Email: kanade@acgme.cn                     *"
         "chi" " {green}*    Email: kanade@acgme.cn                     *"
+        "jp" " {green}*    Email: kanade@acgme.cn                     *"
     }
 
     "prefix"
     {
       "en" " {green}[Einzbern] "
       "chi" " {green}[爱因兹贝伦] "
+      "jp" " {green}[Einzbern] "
     }
 
     "plugin enabled"
     {
       "en" " {default}DangerZone Community Plugins has been enabled."
       "chi" " {default}头号特训社区插件已启用。"
+      "jp" " {default}DangerZoneプラグインが有効化されました。"
     }
 
     "plugin disabled"
     {
       "en" " {default}DangerZone Community Plugins has been disabled."
       "chi" " {default}头号特训社区插件已禁用。"
+      "jp" " {default}DangerZoneプラグインが無効化されました。"
     }
 
     "join game"
     {
       "en" " {default}Player {olive}%s {default}joined game."
       "chi" " {default}玩家{olive}%s{default}加入了游戏！"
+      "jp" " {default}プレイヤー {olive}%s{default}がゲームに参加しました。"
     }
 
     "left game"
     {
       "en" " {default}Player {olive}%s {default}left game."
       "chi" " {default}玩家{olive}%s{default}离开了游戏！"
+      "jp" " {default}プレイヤー {olive}%s{default}がゲームから離脱しました。"
     }
 
     "broadcast interval setting"
@@ -71,6 +82,7 @@
       "#format"	"{1:d}"
       "en" " {default}Broadcast interval has been set to: {1}s"
       "chi" " {default}播报时间间隔已被管理员设置为：{1}s"
+      "jp" " {default}メッセージインターバルが{1}秒に設定されました"
     }
 
     "teamcount setting"
@@ -78,6 +90,7 @@
       "#format"	"{1:d}"
       "en" " {default}Team players count max has been set to: {1}"
       "chi" " {default}队伍人数上限已被管理员设置为：{1}"
+      "jp" " {default}チームの上限プレイヤー数が{1}に設定されました。"
     }
 
     "spawn health setting"
@@ -85,6 +98,7 @@
       "#format"	"{1:d}"
       "en" " {default}Spawn health has been set to: {1}"
       "chi" " {default}初始血量已被管理员设置为：{1}"
+      "jp" " {default}スポーン時のヘルスが{1}に設定されました。"
     }
 
     "max health setting"
@@ -92,6 +106,7 @@
       "#format"	"{1:d}"
       "en" " {default}Max health has been set to: {1}"
       "chi" " {default}血量上限已被管理员设置为：{1}"
+      "jp" " {default}最大ヘルスが{1}に設定されました。"
     }
     
     "ready start players count"
@@ -99,12 +114,14 @@
       "#format"	"{1:d}"
       "en" " {default}Game start needs ready players has been set to: {1}"
       "chi" " {default}游戏开始需要玩家数已被管理员设置为：{1}"
+      "jp" " {default}ゲーム開始に必要なプレイヤー数が {1}に設定されました。"
     }
 
     "ready"
     {
       "en" " {default}You are ready, please wait others."
       "chi" " {default}准备成功，请等待其他玩家准备！"
+      "jp" " {default}あなたは準備完了中です。他のプレイヤーを待機して下さい。"
     }
 
     "ready all"
@@ -112,18 +129,21 @@
       "#format"	"{1:s},{2:d}"
       "en" " {default}Player {olive}{1} {default}is ready now, game will start afer {green}{2} {default}players be ready."
       "chi" " {default}玩家{olive}{1}{default}已成功准备，距离游戏开始还剩余{green}{2}{default}名玩家准备！"
+      "jp" " {default}プレイヤー{olive}{1} {default}は準備完了です。 残り{green}{2} {default}人のプレイヤーが準備完了するとマッチが開始されます。"
     }
 
     "retype ready"
     {
       "en" " {default}You are ready, please type !unready to be unready."
       "chi" " {default}您已准备，可使用 !unready 取消准备！"
+      "jp" " {default}あなたは準備完了中です。 !unready と入力すると解除します。"
     }
 
     "unready"
     {
       "en" " {default}You are not ready now, please be ready soon."
       "chi" " {default}取消准备成功，请尽快重新准备！"
+      "jp" " {default}あなたは準備完了状態ではありません。 準備を完了してください！"
     }
 
     "unready all"
@@ -131,30 +151,35 @@
       "#format"	"{1:s},{2:d}"
       "en" " {default}Player {olive}{1} {default}is unready now, game will start afer {green}{2} {default}players be ready."
       "chi" " {default}玩家{olive}{1}{default}已取消准备，距离游戏开始还剩余{green}{2}{default}名玩家准备！"
+      "jp" " {default}Player {olive}{1} {default}は準備状態を解除しました。残り{green}{2} {default}人のプレイヤーが準備完了するとマッチが開始されます。"
     }
 
     "retype unready"
     {
       "en" " {default}You are not ready, please type !ready to be ready."
       "chi" " {default}您尚未准备，可使用 !ready 准备！"
+      "jp" " {default}あなたはジュb二中ではありません。 !ready と発言して準備完了してください。"
     }
 
     "admin end match"
     {
       "en" " {default}Match has been forced to end."
       "chi" " {default}比赛被强制结束！"
+      "jp" " {default}マッチが強制終了されました。"
     }
 
     "respawn player not found"
     {
       "en" " {default}No player died this time."
       "chi" " {default}没有找到任何死亡的玩家。"
+      "jp" " {default}現在死亡したプレイヤー存在しません。"
     }
 
     "player alive title"
     {
       "en" " {default}Players status:"
       "chi" " {default}当前玩家存活情况："
+      "jp" " {default}プレイヤーステータス:"
     }
 
     "broadcast team count"
@@ -162,6 +187,7 @@
       "#format"	"{1:d}"
       "en" " {default}Team players count: {1}"
       "chi" " {default}随机组队队伍成员数：{1}"
+      "jp" " {default}チームプレイヤー数: {1}"
     }
 
     "broadcast spawn health"
@@ -169,6 +195,7 @@
       "#format"	"{1:d}"
       "en" " {default}Spawn health after game began: {1}"
       "chi" " {default}游戏开始后的初始血量：{1}"
+      "jp" " {default}ゲーム開始後の初期ヘルス: {1}"
     }
 
     "broadcast max health"
@@ -176,12 +203,14 @@
       "#format"	"{1:d}"
       "en" " {default}Max health after game began: {1}"
       "chi" " {default}游戏开始后的最大血量：{1}"
+      "jp" " {default}ゲーム開始後の最大ヘルス: {1}"
     }
 
     "game start"
     {
       "en" " {default}Game will be going in 10 secounds."
       "chi" " {default}游戏将在10秒后开始，请做好准备。"
+      "jp" " {default}10秒後にゲームが開始されます。"
     }
 
     "game start with players"
@@ -189,6 +218,7 @@
       "#format"	"{1:d}"
       "en" " {default}Game will be going in 10 secounds. Players now: {1}"
       "chi" " {default}游戏将在10秒后开始，请做好准备。当前玩家数：{1}"
+      "jp" " {default}10秒後にゲームが開始されます。 プレイヤー数: {1}"
     }
 
     "hint unready"
@@ -196,6 +226,7 @@
       "#format"	"{1:d},{2:d}"
       "en" " {1} / {2} players are ready.\nPlease type !ready to be ready."
       "chi" " {1} / {2} 名玩家已准备\n请输入 !ready 准备。"
+      "jp" " {1} / {2} プレイヤーが準備中です。\n!readyと発言して準備完了"
     }
 
     "hint unready team"
@@ -203,6 +234,7 @@
       "#format"	"{1:d},{2:d}"
       "en" " {1} / {2} players are ready.\nPlease type !ready to be ready, \nType !dzteam to join a team."
       "chi" " {1} / {2} 名玩家已准备\n请输入 !ready 准备，\n输入 !dzteam 加入队伍。"
+      "jp" " {1} / {2} プレイヤーが準備中です。\n!readyと発言して準備完了\n !dzteam と発言してチームに参加"
     }
 
     "hint ready 1"
@@ -210,6 +242,7 @@
       "#format"	"{1:d},{2:d},{3:d}"
       "en" " {1} / {2} players are ready.\nGame start needs at least {3} players."
       "chi" " {1} / {2} 名玩家已准备\n至少需要 {3} 名玩家才能开始游戏。"
+      "jp" " {1} / {2} プレイヤーが準備中。\nゲームの開始には最低でも{3}人のプレイヤーが必要です。"
     }
 
     "hint ready 2"
@@ -217,6 +250,7 @@
       "#format"	"{1:d},{2:d},{3:d}"
       "en" " {1} / {2} players are ready.\nGame start needs other {3} players to be ready."
       "chi" " {1} / {2} 名玩家已准备\n剩余 {3} 名玩家准备后游戏开始。"
+      "jp" " {1} / {2} プレイヤーが準備中。\nゲームの開始にはあと{3}人のプレイヤーが必要です。"
     }
 
     "hurt others"
@@ -224,6 +258,7 @@
       "#format"	"{1:s},{2:s},{3:s},{4:d}"
       "en" " {olive}{1}{default} use {blue}{2}{default} to {olive}{3}{default} damage {red}{4}{default}hp."
       "chi" " {olive}{1}{default}使用{blue}{2}{default}对{olive}{3}{default}造成了{red}{4}{default}点伤害。"
+      "jp" " {olive}{1}{default} use {blue}{2}{default} to {olive}{3}{default} damage {red}{4}{default}hp."
     }
 
     "hurt self"
@@ -231,6 +266,7 @@
       "#format"	"{1:s},{2:d}"
       "en" " {olive}{1}{default} damaged {red}{2} {default}hp to himself."
       "chi" " {olive}{1}{default}对自己造成了{red}{2}{default}点伤害。"
+      "jp" " {olive}{1}{default} damaged {red}{2} {default}hp to himself."
     }
 
     "flash others"
@@ -238,6 +274,7 @@
       "#format"	"{1:s},{2:s},{3:.1f}"
       "en" " {olive}{1}{default} use {blue}flashingbang{default} to flash {olive}{3}{default}'s eyes {red}{3}{default}s."
       "chi" " {olive}{1}{default}使用{blue}闪光弹{default}闪瞎了{olive}{2}{default}的狗眼{red}{3}{default}秒。"
+      "jp" " {olive}{1}{default} use {blue}flashingbang{default} to flash {olive}{3}{default}'s eyes {red}{3}{default}s."
     }
 
     "flash self"
@@ -245,6 +282,7 @@
       "#format"	"{1:s},{2:.1f}"
       "en" " {olive}{1}{default} flashed himself {red}{2} {default}s."
       "chi" " {olive}{1}{default}闪瞎了自己{red}{2}{default}秒。"
+      "jp" " {olive}{1}{default} flashed himself {red}{2} {default}s."
     }
 
     "multi kill"
@@ -252,6 +290,7 @@
       "#format"	"{1:s},{2:d}"
       "en" " {olive}{1}{red} has slained {purple}{2} {red} enemy, who can come and kill him!!!"
       "chi" " {olive}{1}{red}已经击败了{purple}{2}{red}个人了，拜托谁去杀了他吧！"
+      "jp" " {olive}{1}{red} has slained {purple}{2} {red} enemy, who can come and kill him!!!"
     }
 
     "interact"
@@ -259,49 +298,49 @@
       "#format"	"{1:s},{2:s}"
       "en" " {olive}{1}{default} interact with {olive}{2}"
       "chi" " {olive}{1}{default}与{olive}{2}{default}进行了交互。"
-    }
-
-    "interact"
-    {
-      "#format"	"{1:s},{2:s}"
-      "en" " {olive}{1}{default} interact with {olive}{2}"
-      "chi" " {olive}{1}{default}与{olive}{2}{default}进行了交互。"
+      "jp" " {olive}{1}{default} interact with {olive}{2}"
     }
 
     "alive"
     {
       "en" "Alive"
       "chi" "存活"
+      "jp" "生存"
     }
 
     "dead"
     {
       "en" "Dead"
       "chi" "死亡"
+      "jp" "死亡"
     }
 
     "spec"
     {
       "en" "Spec"
       "chi" "观察者"
+      "jp" "観戦"
     }
 
     "left"
     {
       "en" "Left"
       "chi" "剩余"
+      "jp" "残り"
     }
 
     "cfg saved"
     {
       "en" "Local Server Info has been saved."
       "chi" "服务器设置已被保存！"
+      "jp" "ローカルサーバー情報を保存しました。"
     }
 
     "dz admin"
     {
       "en" "DZ Admin Panel"
       "chi" "头号特训管理面板"
+      "jp" "DZ 管理者パネル"
     }
 
 
@@ -309,113 +348,132 @@
     {
       "en" "Server Setting"
       "chi" "设置服务器参数"
+      "jp" "サーバー設定"
     }
 
     "dz respawn"
     {
       "en" "Respawn"
       "chi" "复活玩家"
+      "jp" "リスポーン"
     }
 
     "dz give"
     {
       "en" "Give"
       "chi" "给予道具"
+      "jp" "アイテムを与える"
     }
 
     "dz start"
     {
       "en" "Start game"
       "chi" "开始游戏"
+      "jp" "ゲーム開始"
     }
 
     "dz end"
     {
       "en" "End game"
       "chi" "结束游戏"
+      "jp" "ゲーム終了"
     }
 
     "dz fend"
     {
       "en" "Force end game"
       "chi" "强制结束游戏"
+      "jp" "ゲーム強制終了"
     }
 
     "dz server setting"
     {
       "en" "DZ Server Setting"
       "chi" "头号行动设置面板"
+      "jp" "DZサーバー設定"
     }
 
     "dz team count"
     {
       "en" "Change team players count"
       "chi" "设置队伍人数"
+      "jp" "チームあたりのプレイヤー数変更"
     }
 
     "dz broadcast"
     {
       "en" "Change broadcast interval"
       "chi" "设置播报时间"
+      "jp" "メッセージインターバル"
     }
 
     "dz spawn health"
     {
       "en" "Change spawn health"
       "chi" "设置初始血量"
+      "jp" "初期ヘルスを変更"
     }
 
     "dz max health"
     {
       "en" "Change max health"
       "chi" "设置最大血量"
+      "jp" "最大ヘルスを変更"
     }
 
     "dz ready players"
     {
       "en" "Change game start ready players need"
       "chi" "设置开始游戏所需准备玩家数"
+      "jp" "ゲーム開始に必要なプレイヤー数を変更"
     }
 
     "dz save cfg"
     {
       "en" "=> Save Server Setting"
       "chi" "=> 保存当前设置"
+      "jp" "=> サーバー設定を保存"
     }
     
     "give pistols"
     {
       "en" "Pistols"
       "chi" "手枪"
+      "jp" "ピストル"
     }
 
     "give heavy"
     {
       "en" "Heavy"
       "chi" "重型武器"
+      "jp" "重火器"
     }
 
     "give smgs"
     {
       "en" "SMGs"
       "chi" "冲锋枪"
+      "jp" "サブマシンガン"
     }
 
     "give rifles"
     {
       "en" "Rifles"
       "chi" "步枪"
+      "jp" "ライフル"
     }
 
     "give gear"
     {
       "en" "Gear"
       "chi" "近战武器"
+      "jp" "装備"
     }
     
     "give grenades"
     {
       "en" "Grenades"
       "chi" "投掷物"
+      "jp" "グレネード"
     }
 }

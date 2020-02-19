@@ -4,61 +4,73 @@
     {
       "en" "You cant select team now"
       "chi" "你现在无法选择队伍了。"
+      "jp" "チームを選択できません。"
     }
 
     "join Survival Team"
     {
       "en" "Join Survival Team"
       "chi" "加入小队"
+      "jp" "チームに参加"
     }
 
     "Blue Team" {
       "en" "Blue Team"
       "chi" "①号小队"
+      "jp" "Blueチーム"
     }
 
     "Turquoise Team" {
       "en" "Turquoise Team"
       "chi" "②号小队"
+      "jp" "Turquoiseチーム"
     }
 
     "Banana Team" {
       "en" "Banana Team"
       "chi" "③号小队"
+      "jp" "Bananaチーム"
     }
 
     "Magenta Team" {
       "en" "Magenta Team"
       "chi" "④号小队"
+      "jp" "Magentaチーム"
     }
 
     "Artic Team" {
       "en" "Artic Team"
       "chi" "⑤号小队"
+      "jp" "Articチーム"
     }
 
     "Lime Team" {
       "en" "Lime Team"
       "chi" "⑥号小队"
+      "jp" "Limeチーム"
     }
 
     "Orange Team" {
       "en" "Orange Team"
       "chi" "⑦号小队"
+      "jp" "Orangeチーム"
     }
 
     "Pink Team" {
       "en" "Pink Team"
       "chi" "⑧号小队"
+      "jp" "Pinkチーム"
     }
 
     "Purple Team" {
       "en" "Purple Team"
       "chi" "⑨号小队"
+      "jp" "Purpleチーム"
     }
 
     "White Team" {
       "en" "White Team"
       "chi" "⑩号小队"
+      "jp" "Whiteチーム"
     }
 }
